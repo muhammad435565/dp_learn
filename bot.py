@@ -26,7 +26,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 # Start bot
 if __name__ == '__main__':
-    app = ApplicationBuilder().token("YOUR_BOT_TOKEN").build()
+    app = ApplicationBuilder().token("7112951421:AAEGEpHWb3dC0lPyV9qvjjUnWLZN8aw0pMs").build()
     app.add_handler(CommandHandler("start", start))
     print("Bot is running...")
     app.run_polling()
