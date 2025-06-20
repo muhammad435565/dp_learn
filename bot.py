@@ -3,9 +3,9 @@ import mysql.connector
 from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 
-# Connect to MySQL Database
+# ⛓️ MySQL Database connection
 def save_user(user):
-    connection = mysql.connector.connect(
+   connection = mysql.connector.connect(
         host='sql311.alchosting.xyz',
         user='alcy_38988147',
         password='IyF0kBBk882hrZd',
@@ -18,15 +18,15 @@ def save_user(user):
     connection.commit()
     connection.close()
 
-# Start command
+# 🟢 /start command
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user = update.effective_user
     save_user(user)
     await update.message.reply_text("Hello World!")
 
-# Start bot
+# 🚀 Start the bot
 if __name__ == '__main__':
-    app = ApplicationBuilder().token("7112951421:AAEGEpHWb3dC0lPyV9qvjjUnWLZN8aw0pMs").build()
+    app = ApplicationBuilder().token(os.environ.get("BOT_TOKEN")).build()
     app.add_handler(CommandHandler("start", start))
-    print("Bot is running...")
+    print("Bot running...")
     app.run_polling()
