@@ -1,14 +1,19 @@
-from telegram import Update
-from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
-import os
+<?php
 
-# /start command
-async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text("Hello World!")
+// Telegram se data uthao
+$update = json_decode(file_get_contents("php://input"), true);
 
-# Start the bot
-if __name__ == '__main__':
-    app = ApplicationBuilder().token(os.environ.get("BOT_TOKEN")).build()
-    app.add_handler(CommandHandler("start", start))
-    print("Bot running...")
-    app.run_polling()
+// User ka message aur chat ID
+$message = $update["message"]["text"];
+$chat_id = $update["message"]["chat"]["id"];
+
+// Bot ka token
+$token = "7112951421:AAEGEpHWb3dC0lPyV9qvjjUnWLZN8aw0pMs";
+
+// Agar user ne /start likha
+if ($message == "/start") {
+    $text = "Hello World!";
+
+    // Message bhejo Telegram ko
+    file_get_contents("https://api.telegram.org/bot$token/sendMessage?chat_id=$chat_id&text=" . urlencode($text));
+}
